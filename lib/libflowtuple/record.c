@@ -74,6 +74,7 @@ void _flowtuple_record_read_header(flowtuple_handle_t *handle, flowtuple_record_
     flowtuple_header_t header;
     int64_t wand;
     uint16_t trace_uri_len_host;
+    size_t i;
 
     CALLOC(buf, 26, sizeof(uint8_t), goto nomem);
 
@@ -113,7 +114,7 @@ void _flowtuple_record_read_header(flowtuple_handle_t *handle, flowtuple_record_
     CALLOC(header.plugins, header.plugin_cnt, sizeof(uint32_t), goto nomem);
 
     wandio_read(handle->io, buf, header.plugin_cnt * 4);
-    for (size_t i = 0; i < header.plugin_cnt; i++) {
+    for (i = 0; i < header.plugin_cnt; i++) {
         header.plugins[i] = *(uint32_t*)(buf + (4 * i));
     }
 
