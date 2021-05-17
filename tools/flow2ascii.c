@@ -38,6 +38,7 @@ void header_print(flowtuple_header_t *header) {
     const char *traceuri;
     const uint32_t *plugins;
     uint16_t plugin_count;
+    int i;
 
     printf("# CORSARO_VERSION %d.%d\n",
         flowtuple_header_get_version_major(header), flowtuple_header_get_version_minor(header));
@@ -51,7 +52,7 @@ void header_print(flowtuple_header_t *header) {
 
     plugin_count = flowtuple_header_get_plugin_count(header);
     plugins = flowtuple_header_get_plugins(header);
-    for (int i = 0; i < plugin_count; i++) {
+    for (i = 0; i < plugin_count; i++) {
         /* really, there's only one expected plugin */
         /* not true, ...... */
         if (plugins[i] == FLOWTUPLE_MAGIC_SIXT || plugins[i] == FLOWTUPLE_MAGIC_SIXU) {
@@ -174,6 +175,7 @@ int main(int argc, char **argv) {
     int trackers[] = { 1, 1, 0 }; /* is interval start, is class start, first octet */
     int c;                        /* getopt option */
     char *tmp;                    /* getopt tmp string */
+    int index;
 
     /* we expect arguments, always */
     if (argc < 2) {
@@ -220,7 +222,7 @@ int main(int argc, char **argv) {
     }
 
     /* get non-getopt options */
-    for (int index = optind; index < argc; index++) {
+    for (index = optind; index < argc; index++) {
         if (filename != NULL) {
             break;
         }
