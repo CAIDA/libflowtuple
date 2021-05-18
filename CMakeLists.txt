@@ -30,13 +30,13 @@ set(LIBFLOWTUPLE_VERSION_STRING "${VERSION}")
 
 option(ENABLE_INSTALL "Enable installing of libraries" ON)
 
+include_directories(lib/libflowtuple /usr/local/include)
+link_directories(/usr/local/lib)
 find_library(WANDIO wandio)
 
 if(NOT WANDIO)
   message(FATAL_ERROR "libwandio not found")
 endif()
-
-include_directories(lib/libflowtuple)
 
 # include(CreatePkgConfigFile)
 
